@@ -10,7 +10,7 @@ public class Account extends Entity {
     AccountStatus accountStatus;
 
     public Account(String fileString, Connector connector){
-        super();
+        super(fileString,connector);
     }
 
     public String serialize() {

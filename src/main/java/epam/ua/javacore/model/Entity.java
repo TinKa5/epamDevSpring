@@ -6,8 +6,10 @@ import epam.ua.javacore.repository.Connector;
 public abstract class Entity {
     Long id;
 
-    Entity(){};
-    Entity(String fileString, Connector connector){
+
+    Entity(){}
+
+    public Entity(String fileString, Connector connector){
         deserialize(fileString,connector);
     }
 

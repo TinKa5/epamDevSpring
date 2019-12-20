@@ -17,13 +17,10 @@ public class Developer extends Entity {
     Account account;
 
     public Developer(String fileString, Connector connector){
-        super();
+        super(fileString,connector);
     }
 
-    Developer(Long id,String name, Set<Skill> skillSet, Account account) {
-
-
-    }
+    Developer(Long id,String name, Set<Skill> skillSet, Account account) { }
 
     public String serialize() {
         return super.id.toString()+" "+name+" "+ ModelUtil.setToString(skillSet)+" "+account.getId();

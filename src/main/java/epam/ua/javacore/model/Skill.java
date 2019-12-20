@@ -9,7 +9,7 @@ public class Skill extends Entity {
     String skill;
 
     public Skill(String fileString, Connector connector){
-        super();
+        super(fileString,connector);
     }
 
     public String serialize() {
