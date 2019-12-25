@@ -1,7 +1,7 @@
 package epam.ua.javacore.model;
 
 
-import epam.ua.javacore.repository.Connector;
+import epam.ua.javacore.repository.io.Connector;
 
 public abstract class Entity {
     Long id;
@@ -23,5 +23,8 @@ public abstract class Entity {
 
     public abstract void deserialize (String string,Connector connector);
 
-
+    @Override
+    public String toString() {
+        return serialize()+"\n";
+    }
 }

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 public class ModelUtil {
-    public static <T extends Entity> String setToString(Set<T> set){
+    public static <T extends Entity> String setToStringId(Set<T> set){
         String s="";
         for (T entity:set) {
             if(!s.equals("")){s+=",";}
@@ -17,6 +17,17 @@ public class ModelUtil {
         }
         return s;
     }
+
+    public static <T extends Entity> String setToString(Set<T> set){
+        String s="";
+        for (T entity:set) {
+            if(!s.equals("")){s+=",";}
+            s+=entity.toString();
+        }
+        return s;
+    }
+
+
 
     public static Collection<Long> StringToSetId(String s){
         List result=new LinkedList();

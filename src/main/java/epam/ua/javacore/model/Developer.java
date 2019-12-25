@@ -1,14 +1,11 @@
 package epam.ua.javacore.model;
 
-import epam.ua.javacore.util.ModelUtil;
-
-import epam.ua.javacore.repository.Connector;
+import epam.ua.javacore.repository.io.Connector;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import static epam.ua.javacore.util.ModelUtil.StringToSetId;
-import static epam.ua.javacore.util.ModelUtil.toLong;
+import static epam.ua.javacore.util.ModelUtil.*;
 
 
 public class Developer extends Entity {
@@ -20,10 +17,14 @@ public class Developer extends Entity {
         super(fileString,connector);
     }
 
-    Developer(Long id,String name, Set<Skill> skillSet, Account account) { }
+    public Developer(String name, Set<Skill> skillSet, Account account) {
+        this.name=name;
+        this.skillSet=skillSet;
+        this.account=account;
+    }
 
     public String serialize() {
-        return super.id.toString()+" "+name+" "+ ModelUtil.setToString(skillSet)+" "+account.getId();
+        return name+" "+ setToStringId(skillSet)+" "+account.getId();
     }
 
     public void deserialize(String string, Connector connector) {
@@ -38,10 +39,11 @@ public class Developer extends Entity {
         }
 
         account=(Account)connector.createConnection(Account.class,toLong(strings[3]));
-
-
         connector.registration(this);
     }
 
-
+    @Override
+    public String toString() {
+        return  Long.toString(getId())+" "+name+" "+ setToString(skillSet)+" "+account.toString();
+    }
 }

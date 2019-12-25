@@ -1,16 +1,21 @@
 package epam.ua.javacore.view;
 
-import epam.ua.javacore.controller.SkillController;
+import epam.ua.javacore.controller.DeveloperController;
 
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import static epam.ua.javacore.util.ModelUtil.toLong;
 import static epam.ua.javacore.util.ViewUtil.print;
 
-public class SkillView {
+public class DeveloperView {
     String MAIN = "1-Get all \n2-Get Id\n3-Add element\n4-Delete\n0-Exit\n";
-    public void printMain() {
+
+   public void printMain() {
         print(MAIN);
         Scanner scan = new Scanner(System.in);
         Integer choise;
@@ -24,7 +29,7 @@ public class SkillView {
     }
 
     private void setChoise(int i){
-        SkillController controller=new SkillController();
+        DeveloperController controller=new DeveloperController();
         Scanner sc=new Scanner(System.in);
         switch (i){
             case(1):
@@ -35,8 +40,15 @@ public class SkillView {
                 print(controller.get(sc.nextLong()));
                 break;
             case(3):
-                print("Enter skill");
-                print(controller.add(sc.nextLine()));
+                print("Enter name dev");
+                String name=sc.nextLine();
+                print("Enter id skills set using ,");
+                String set=sc.nextLine();
+                String[] skills=set.split(",");
+                Set<Long> skillsId=Stream.of(skills).map(x->toLong(x)).collect(Collectors.toSet());
+                print("Enter id account");
+                Long account=sc.nextLong();
+                print(controller.add(name,skillsId,account));
                 break;
             case(4):
                 print("Write id: ");

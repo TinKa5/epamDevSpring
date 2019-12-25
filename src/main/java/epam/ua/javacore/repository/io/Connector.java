@@ -1,4 +1,4 @@
-package epam.ua.javacore.repository;
+package epam.ua.javacore.repository.io;
 
 import epam.ua.javacore.model.Account;
 import epam.ua.javacore.model.Developer;
@@ -74,6 +74,6 @@ public class Connector {
     }
 
     public void registration(Entity entity){
-        loadList.get(entity).loadingClasses.put(entity.getId(),entity);
+        loadList.get(entity.getClass()).loadingClasses.put(entity.getId(),entity);
     }
 }

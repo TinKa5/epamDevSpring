@@ -1,7 +1,6 @@
 package epam.ua.javacore.model;
 
-import epam.ua.javacore.util.ModelUtil;
-import epam.ua.javacore.repository.Connector;
+import epam.ua.javacore.repository.io.Connector;
 
 import static epam.ua.javacore.util.ModelUtil.toLong;
 
@@ -13,15 +12,27 @@ public class Account extends Entity {
         super(fileString,connector);
     }
 
+    public Account(String content, AccountStatus accountStatus){
+        this.content=content;
+        this.accountStatus=accountStatus;
+    }
+
+
     public String serialize() {
-        return super.id.toString()+" "+content+" "+accountStatus.toString();
+        return content+" "+accountStatus.toString();
     }
 
     public void deserialize(String string, Connector connector) {
         String[] strings=string.split(" ");
         super.id= toLong(strings[0]);
-        accountStatus=AccountStatus.valueOf(strings[1]);
+        content=strings[1];
+        accountStatus=AccountStatus.valueOf(strings[2]);
         connector.registration(this);
 
+    }
+
+    @Override
+    public String toString() {
+        return Long.toString(getId())+" "+content+" "+accountStatus;
     }
 }
