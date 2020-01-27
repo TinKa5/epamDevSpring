@@ -41,8 +41,11 @@ public class DeveloperController {
             skillSet.add(skillRepository.get(k));
         }
         Account account=accountRepository.get(accountId);
-
-        return "Success adding "+repository.add(new Developer(name,skillSet,account));
+        Developer developer=new Developer();
+        developer.setName(name);
+        developer.setAccount(account);
+        developer.setSkillSet(skillSet);
+        return "Success adding "+repository.add(developer);
     }
 
     public String delete(Long id){

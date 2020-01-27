@@ -12,11 +12,15 @@ public class Account extends Entity {
         super(fileString,connector);
     }
 
-    public Account(String content, AccountStatus accountStatus){
-        this.content=content;
-        this.accountStatus=accountStatus;
+    public Account(){}
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
+    public void setAccountStatus(AccountStatus accountStatus) {
+        this.accountStatus = accountStatus;
+    }
 
     public String serialize() {
         return content+" "+accountStatus.toString();

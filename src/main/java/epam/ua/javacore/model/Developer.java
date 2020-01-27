@@ -13,14 +13,36 @@ public class Developer extends Entity {
     Set<Skill> skillSet;
     Account account;
 
+    public String getName() {
+        return name;
+    }
+
+    public Set<Skill> getSkillSet() {
+        return skillSet;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
     public Developer(String fileString, Connector connector){
         super(fileString,connector);
     }
 
-    public Developer(String name, Set<Skill> skillSet, Account account) {
-        this.name=name;
-        this.skillSet=skillSet;
-        this.account=account;
+    public Developer() {
+
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSkillSet(Set<Skill> skillSet) {
+        this.skillSet = skillSet;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     public String serialize() {

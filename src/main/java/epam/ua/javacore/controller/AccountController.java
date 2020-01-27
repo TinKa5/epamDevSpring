@@ -27,7 +27,10 @@ public class AccountController {
 
     public String add(String name,String accountStatus){
         entityValidation(name);
-        return "Success adding "+repository.add(new Account(name, AccountStatus.valueOf(accountStatus)));
+        Account account=new Account();
+        account.setContent(name);
+        account.setAccountStatus(AccountStatus.valueOf(accountStatus));
+        return "Success adding "+repository.add(account);
     }
 
     public String delete(Long id){

@@ -7,14 +7,20 @@ import static epam.ua.javacore.util.ModelUtil.toLong;
 public class Skill extends Entity {
     String name;
 
+    public Skill(){};
+
     public Skill(String fileString, Connector connector){
         super(fileString,connector);
     }
 
-    public Skill(String name){
-        this.name=name;
+
+    public String getName() {
+        return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String serialize() {
         return name;

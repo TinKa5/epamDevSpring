@@ -23,7 +23,9 @@ public class SkillController {
 
     public String add(String name){
         entityValidation(name);
-        return "Success adding "+repository.add(new Skill(name));
+        Skill skill=new Skill();
+        skill.setName(name);
+        return "Success adding "+repository.add(skill);
     }
 
     public String delete(Long id){
