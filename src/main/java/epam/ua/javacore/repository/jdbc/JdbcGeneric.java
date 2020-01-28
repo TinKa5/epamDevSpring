@@ -1,10 +1,8 @@
 package epam.ua.javacore.repository.jdbc;
 
-import epam.ua.javacore.model.Skill;
+
 import epam.ua.javacore.repository.GenericRepository;
 import epam.ua.javacore.util.jdbc.JDBCConnectionPool;
-import epam.ua.javacore.util.jdbc.JDBCMapper;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

@@ -1,25 +1,17 @@
 DROP TABLE IF EXISTS skills_developers;
 DROP TABLE IF EXISTS developers;
 DROP TABLE IF EXISTS account;
-DROP TABLE IF EXISTS account_status;
 DROP TABLE IF EXISTS skills;
 CREATE TABLE skills(
   id INT AUTO_INCREMENT PRIMARY KEY ,
   name VARCHAR(30) NOT NULL
 );
 
-  CREATE TABLE account_status(
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    status VARCHAR(30) NOT NULL
-  );
-
-  CREATE TABLE account(
+ CREATE TABLE account(
     id INT AUTO_INCREMENT PRIMARY KEY ,
     content VARCHAR(250) NOT NULL ,
-    status_id INT,
-    FOREIGN KEY (status_id) REFERENCES account_status(Id)
-
-  );
+    status VARCHAR(30) NOT NULL
+   );
 
   CREATE TABLE developers(
     id INT AUTO_INCREMENT PRIMARY KEY,

@@ -13,12 +13,11 @@ import java.sql.SQLException;
 public class JdbcDeveloperRepository extends JdbcGeneric<Developer> {
 
     private final String sqlSelectAll="SELECT dev.id, dev.name, account.id," +
-            "account.content, acstatus.status, skill.id, skill.name" +
+            "account.content, account.status, skill.id, skill.name" +
             " FROM developers AS dev" +
             " JOIN skills_developers AS temp ON dev.id=developer_id" +
             " JOIN skills AS s ON temp.skill_id=s.id" +
-            " JOIN account AS account ON dev.account_id=account.id" +
-            " JOIN account_status AS acstatus ON account.status_id=acstatus.id";
+            " JOIN account AS account ON dev.account_id=account.id";
 
     private final String sqlSelectID=sqlSelectAll+" WHERE dev.id=?";
 

@@ -14,6 +14,14 @@ public class Account extends Entity {
 
     public Account(){}
 
+    public String getContent() {
+        return content;
+    }
+
+    public AccountStatus getAccountStatus() {
+        return accountStatus;
+    }
+
     public void setContent(String content) {
         this.content = content;
     }
