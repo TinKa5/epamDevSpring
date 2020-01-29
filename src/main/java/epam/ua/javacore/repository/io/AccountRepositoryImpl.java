@@ -38,7 +38,9 @@ public class AccountRepositoryImpl extends FileImplementationGenericRepository i
 
     }
 
-    public void delete(Long id) {
+    public boolean delete(Long id) {
+
         deleteFromFile(FILE,id);
+        return true;
     }
 }

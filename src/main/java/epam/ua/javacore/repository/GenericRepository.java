@@ -6,5 +6,5 @@ public interface GenericRepository<T,ID> {
     public Collection<T> getAll();
     public T get(ID id);
     public T add(T t);
-    public void delete(ID id);
+    public boolean delete(ID id);
 }

@@ -45,9 +45,10 @@ public class DeveloperRepositoryImpl extends FileImplementationGenericRepository
 
     }
 
-    public void delete(Long id) {
+    public boolean delete(Long id) {
         deleteFromFile(FILE,id);
         connector=null;
+        return true;
     }
 }
 

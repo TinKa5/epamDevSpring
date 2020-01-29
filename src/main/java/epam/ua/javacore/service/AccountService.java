@@ -1,36 +1,36 @@
-package epam.ua.javacore.controller;
+package epam.ua.javacore.service;
 
 import epam.ua.javacore.model.Account;
 import epam.ua.javacore.model.AccountStatus;
 import epam.ua.javacore.repository.jdbc.JdbcAccountRepository;
 import epam.ua.javacore.repository.jdbc.JdbcGeneric;
-import epam.ua.javacore.service.AccountService;
 
 import java.util.stream.Stream;
 
 import static epam.ua.javacore.util.Validate.entityValidation;
 import static epam.ua.javacore.util.Validate.idValidation;
 
-public class AccountController {
-    AccountService service=new AccountService();
+public class AccountService {
+    JdbcGeneric repository=new JdbcAccountRepository();
 
     public Stream<String> getAll(){
-        return service.getAll();
-
+        return repository.getAll().stream().map(x->x.toString());
     }
+
     public String get(Long id){
-        idValidation(id);
-        return service.get(id);
+       return repository.get(id).toString();
     }
 
     public String add(String name,String accountStatus){
-        entityValidation(name);
-        return "Success adding "+service.add(name,accountStatus);
+        Account account=new Account();
+        account.setContent(name);
+        account.setAccountStatus(AccountStatus.valueOf(accountStatus));
+        return repository.add(account).toString();
     }
 
-    public String delete(Long id){
-        idValidation(id);
-        service.delete(id);
-        return "Success deleting";
+    public void delete(Long id){
+        if (!repository.delete(id)){
+
+        };
     }
 }

@@ -11,7 +11,7 @@ import java.util.Properties;
 
 public class JDBCConnectionPool {
     private static BasicDataSource bds=new BasicDataSource();
-    private  static final String PROP_FILE="/src/main/resources/db/db.properties";
+    private  static final String PROP_FILE="src/main/resources/db/db.properties";
     private static String URL;
     private static String USERNAME;
     private static String PASSWORD;
@@ -28,6 +28,7 @@ public class JDBCConnectionPool {
         bds.setMaxIdle(MAX_IDLE);
         bds.setMinIdle(MIN_IDLE);
         bds.setMaxOpenPreparedStatements(MAX_STATEMENT);
+
 
     }
 

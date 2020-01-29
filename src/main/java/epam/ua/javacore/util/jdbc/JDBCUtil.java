@@ -6,6 +6,7 @@ import java.sql.Statement;
 
 public class JDBCUtil {
     public static Long getLastInsertId(Statement statement)throws SQLException {
-        return statement.executeQuery("SELECT LAST_INSERT_ID()").getLong(1);
+
+        return statement.executeQuery("SELECT MAX(id) ").getLong(1);
     }
 }

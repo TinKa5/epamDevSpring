@@ -1,6 +1,7 @@
 package epam.ua.javacore.view;
 
 import epam.ua.javacore.controller.SkillController;
+import epam.ua.javacore.service.SkillService;
 
 
 import java.util.InputMismatchException;

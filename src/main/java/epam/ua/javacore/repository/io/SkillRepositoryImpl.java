@@ -42,8 +42,9 @@ public class SkillRepositoryImpl extends FileImplementationGenericRepository imp
         return get(id);
     }
 
-    public void delete(Long id) {
+    public boolean delete(Long id) {
         deleteFromFile(FILE,id);
+        return true;
     }
 }
 

@@ -1,8 +1,7 @@
 package epam.ua.javacore.view;
 
 import epam.ua.javacore.controller.AccountController;
-import epam.ua.javacore.controller.SkillController;
-import epam.ua.javacore.model.Account;
+import epam.ua.javacore.service.AccountService;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

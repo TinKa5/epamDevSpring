@@ -32,7 +32,7 @@ public class JDBCMapper<T>{
 
     public  static Collection mapToSkill(ResultSet resultSet)throws SQLException{
         Set<Skill> set=new HashSet<>();
-        while (resultSet.next()){
+       while (resultSet.next()){
             Long id=resultSet.getLong("id");
             Skill skill=new Skill();
             skill.setId(id);

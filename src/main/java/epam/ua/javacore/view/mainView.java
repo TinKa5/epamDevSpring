@@ -1,8 +1,7 @@
 package epam.ua.javacore.view;
 
 
-import epam.ua.javacore.controller.SkillController;
-import epam.ua.javacore.model.Developer;
+import epam.ua.javacore.service.SkillService;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -36,7 +35,7 @@ public class mainView {
     }
 
     private static void setChoise(int i){
-        SkillController controller=new SkillController();
+        SkillService controller=new SkillService();
 
         switch (i){
             case(1):
