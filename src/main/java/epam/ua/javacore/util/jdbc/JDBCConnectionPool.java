@@ -11,13 +11,14 @@ import java.util.Properties;
 
 public class JDBCConnectionPool {
     private static BasicDataSource bds=new BasicDataSource();
-    private  static final String PROP_FILE="src/main/resources/db/db.properties";
+    private  static final String PROP_FILE="C:\\Users\\brusnik\\IdeaProjects\\epamDev\\src\\main\\resources\\db\\db.properties";
     private static String URL;
     private static String USERNAME;
     private static String PASSWORD;
     private static int MAX_IDLE=10;
     private static int MIN_IDLE=5;
     private static int MAX_STATEMENT=100;
+
 
 
     static {
@@ -28,11 +29,14 @@ public class JDBCConnectionPool {
         bds.setMaxIdle(MAX_IDLE);
         bds.setMinIdle(MIN_IDLE);
         bds.setMaxOpenPreparedStatements(MAX_STATEMENT);
+        bds.setDriverClassName("com.mysql.cj.jdbc.Driver");
+
 
 
     }
 
     public static Connection getConnection() throws SQLException{
+
         return bds.getConnection();
     }
 

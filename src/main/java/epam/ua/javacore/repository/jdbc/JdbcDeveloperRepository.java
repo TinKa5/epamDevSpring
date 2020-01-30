@@ -66,9 +66,8 @@ public class JdbcDeveloperRepository extends JdbcGeneric<Developer> {
     public boolean delete(Long id) {
         super.delete(id);
 
-        try {
-            Connection connection=JDBCConnectionPool.getConnection();
-            PreparedStatement statement = connection.prepareStatement(sqlDeleteConnection);
+        try(Connection connection=JDBCConnectionPool.getConnection();
+            PreparedStatement statement = connection.prepareStatement(sqlDeleteConnection);) {
                 statement.setLong(1, id);
                 statement.executeUpdate();
                 return true;

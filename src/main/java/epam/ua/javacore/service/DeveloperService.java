@@ -11,6 +11,7 @@ import epam.ua.javacore.repository.jdbc.JdbcDeveloperRepository;
 import epam.ua.javacore.repository.jdbc.JdbcGeneric;
 import epam.ua.javacore.repository.jdbc.JdbcSkillRepository;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
@@ -23,29 +24,19 @@ public class DeveloperService {
     JdbcSkillRepository skillRepository=new JdbcSkillRepository();
     JdbcAccountRepository accountRepository=new JdbcAccountRepository();
 
-    public Stream<String> getAll(){
-        return repository.getAll().stream().map(x->x.toString());
+    public Collection<Developer> getAll(){
+        return repository.getAll();
     }
 
-    public String get(Long id){
-        return repository.get(id).toString();
+    public Developer get(Long id){
+        return repository.get(id);
     }
 
-    public String add(String name, Set<Long> skillSetId,Long accountId){
-        Set<Skill> skillSet=new HashSet<>();
-        for (Long k:skillSetId) {
-            skillSet.add(skillRepository.get(k));
-        }
-        Account account=accountRepository.get(accountId);
-        Developer developer=new Developer();
-        developer.setName(name);
-        developer.setAccount(account);
-        developer.setSkillSet(skillSet);
-        return repository.add(developer).toString();
+    public Developer add(Developer developer){
+        return repository.add(developer);
     }
 
     public void delete(Long id){
-
         repository.delete(id);
 
     }

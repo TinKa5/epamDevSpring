@@ -14,17 +14,19 @@ public class SkillController {
     SkillService service=new SkillService();
 
     public Stream<String> getAll(){
-        return service.getAll();
+        return service.getAll().stream().map(Skill::toString);
 
     }
     public String get(Long id){
         idValidation(id);
-        return service.get(id);
+        return service.get(id).toString();
     }
 
     public String add(String name){
         entityValidation(name);
-        return "Success adding "+service.add(name);
+        Skill skill=new Skill();
+        skill.setName(name);
+        return "Success adding "+service.add(skill);
     }
 
     public String delete(Long id){

@@ -15,17 +15,21 @@ public class AccountController {
     AccountService service=new AccountService();
 
     public Stream<String> getAll(){
-        return service.getAll();
-
+        return service.getAll().stream().map(x->x.toString());
     }
+
     public String get(Long id){
         idValidation(id);
-        return service.get(id);
+        return service.get(id).toString();
     }
 
     public String add(String name,String accountStatus){
         entityValidation(name);
-        return "Success adding "+service.add(name,accountStatus);
+
+        Account account=new Account();
+        account.setContent(name);
+        account.setAccountStatus(AccountStatus.valueOf(accountStatus));
+        return "Success adding "+service.add(account);
     }
 
     public String delete(Long id){
