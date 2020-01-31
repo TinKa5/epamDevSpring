@@ -11,7 +11,7 @@ import java.util.Properties;
 
 public class JDBCConnectionPool {
     private static BasicDataSource bds=new BasicDataSource();
-    private  static final String PROP_FILE="C:\\Users\\brusnik\\IdeaProjects\\epamDev\\src\\main\\resources\\db\\db.properties";
+    private  static final String PROP_FILE="/src/main/resources/db/db.properties";
     private static String URL;
     private static String USERNAME;
     private static String PASSWORD;
