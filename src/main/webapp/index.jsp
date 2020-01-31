@@ -10,5 +10,5 @@
 <head>
     <title>EpamDev</title>
 </head>
-<body>About my project</body>
+<body>About my project TOMCAT</body>
 </html>

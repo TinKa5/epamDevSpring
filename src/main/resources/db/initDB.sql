@@ -16,14 +16,11 @@ CREATE TABLE skill(
 
   CREATE TABLE developer(
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(50) NOT NULL ,
-    account_id INT ,
-    FOREIGN KEY (account_id) references account (id) ON DELETE SET NULL
+    name VARCHAR(50) NOT NULL,
+    account_id INT REFERENCES account(id)
   );
 
 CREATE TABLE skills_developers(
-  developer_id INT NOT NULL ,
-  skill_id INT NOT NULL ,
-  FOREIGN KEY (developer_id) REFERENCES developer(id),
-  FOREIGN KEY (skill_id) REFERENCES skill(id)
+  developer_id INT NOT NULL REFERENCES  developer(id),
+  skill_id INT NOT NULL REFERENCES skill(id)
 )
