@@ -1,33 +1,53 @@
 package epam.ua.javacore.service;
 
+import epam.ua.javacore.exeption.NotFoundException;
 import epam.ua.javacore.model.Skill;
-import epam.ua.javacore.repository.SkillRepository;
-import epam.ua.javacore.repository.io.SkillRepositoryImpl;
 import epam.ua.javacore.repository.jdbc.JdbcSkillRepository;
-
+import org.apache.log4j.Logger;
 import java.util.Collection;
-import java.util.stream.Stream;
+import static epam.ua.javacore.util.Validate.checkNotFound;
+import static epam.ua.javacore.util.Validate.checkNotFoundWithId;
 
-import static epam.ua.javacore.util.Validate.entityValidation;
-import static epam.ua.javacore.util.Validate.idValidation;
 
 public class SkillService {
     JdbcSkillRepository repository=new JdbcSkillRepository();
 
+    private static final Logger log = Logger.getLogger(AccountService.class);
+
+
     public Collection<Skill> getAll(){
+        log.info("getAll in Service");
         return repository.getAll();
 
     }
-    public Skill get(Long id){
-        return repository.get(id);
+    public Skill get(Long id)throws NotFoundException {
+        log.info("getId in Service");
+        try{
+            return checkNotFoundWithId(repository.get(id),id);
+        }catch (NotFoundException e){
+            log.warn(e.getMessage());
+            throw new NotFoundException(e.getMessage());
+        }
     }
 
-    public Skill add(Skill skill){
-        return repository.add(skill);
-    }
+    public Skill add(Skill skill) throws NotFoundException {
+        log.info("add in Service");
+        try{
+            return checkNotFound(repository.add(skill));
+        }catch (NotFoundException e){
+            log.warn(e.getMessage());
+            throw new NotFoundException(e.getMessage());
+        }
 
-    public void delete(Long id){
-        repository.delete(id);
+    }
+    public void delete(Long id) throws NotFoundException {
+        log.info("delete in Service");
+        try{
+            checkNotFoundWithId(repository.delete(id),id);
+        }catch (NotFoundException e){
+            log.warn(e.getMessage());
+            throw new NotFoundException(e.getMessage());
+        }
 
     }
 }

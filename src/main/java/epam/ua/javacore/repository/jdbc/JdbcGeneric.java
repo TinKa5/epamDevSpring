@@ -6,25 +6,25 @@ import epam.ua.javacore.util.jdbc.JDBCConnectionPool;
 
 import java.sql.*;
 import java.util.Collection;
+import java.util.Objects;
 
 import static epam.ua.javacore.util.jdbc.JDBCMapper.mapToObject;
 import static epam.ua.javacore.util.jdbc.JDBCMapper.mapToStatement;
 
 
-public abstract class JdbcGeneric<T> implements GenericRepository<T,Long> {
+public interface JdbcGeneric<T> extends GenericRepository<T,Long> {
 
-    abstract String getSqlSelectAll();
-    abstract String getSqlSelectID();
-    abstract String getSqlAdd();
-    abstract String getSqlDelete();
-    abstract String getSqlMax();
+    String getSqlSelectAll();
+    String getSqlSelectID();
+    String getSqlAdd();
+    String getSqlDelete();
+    String getSqlMax();
 
 
     @Override
-    public Collection<T> getAll() {
+    default public Collection<T> getAll() {
         try (Connection connection=JDBCConnectionPool.getConnection();
              PreparedStatement statement=connection.prepareStatement(getSqlSelectAll())){
-
             Collection<T> result=mapToObject(this,statement.executeQuery());
             return !result.isEmpty()?result:null;
         }catch (SQLException e){
@@ -33,7 +33,7 @@ public abstract class JdbcGeneric<T> implements GenericRepository<T,Long> {
         return null;
     }
     @Override
-    public T get(Long id) {
+    default public T get(Long id) {
         try (Connection connection=JDBCConnectionPool.getConnection();
              PreparedStatement statement=connection.prepareStatement(getSqlSelectID());){
             statement.setLong(1,id);
@@ -48,7 +48,7 @@ public abstract class JdbcGeneric<T> implements GenericRepository<T,Long> {
     }
 
     @Override
-    public T add(T t) {
+    default public T add(T t) {
 
         Long i=null;
         try(Connection connection=JDBCConnectionPool.getConnection();
@@ -65,13 +65,11 @@ public abstract class JdbcGeneric<T> implements GenericRepository<T,Long> {
     }
 
     @Override
-    public boolean delete(Long id) {
+    default public boolean delete(Long id) {
         try(Connection connection=JDBCConnectionPool.getConnection();
             PreparedStatement statement=connection.prepareStatement(getSqlDelete())) {
-
             statement.setLong(1,id);
-            statement.executeUpdate();
-            return true;
+            return statement.executeUpdate()==0?false:true;
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -80,7 +78,7 @@ public abstract class JdbcGeneric<T> implements GenericRepository<T,Long> {
     }
 
 
-    Long maxId(){
+    default Long maxId(){
 
         try(Connection connection=JDBCConnectionPool.getConnection();
             PreparedStatement statement=connection.prepareStatement(getSqlMax());) {

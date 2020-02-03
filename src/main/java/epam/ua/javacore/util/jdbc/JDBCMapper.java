@@ -78,7 +78,11 @@ public class JDBCMapper<T>{
                     Account acc = new Account();
                     acc.setId(accounId);
                     acc.setContent(resultSet.getString("account.content"));
-                    acc.setAccountStatus(AccountStatus.valueOf(resultSet.getString("account.status")));
+
+                    String status=resultSet.getString("account.status");
+                    acc.setAccountStatus((status)==null?
+                            null:
+                            AccountStatus.valueOf(status));
                     dev.setAccount(acc);
                     account.put(accounId, acc);
                 }////add skills

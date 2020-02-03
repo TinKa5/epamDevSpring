@@ -12,6 +12,7 @@ import java.util.Properties;
 public class JDBCConnectionPool {
     private static BasicDataSource bds=new BasicDataSource();
     private  static final String PROP_FILE= "./src/main/resources/db.properties";
+    private static String DRIVER;
     private static String URL;
     private static String USERNAME;
     private static String PASSWORD;
@@ -29,7 +30,7 @@ public class JDBCConnectionPool {
         bds.setMaxIdle(MAX_IDLE);
         bds.setMinIdle(MIN_IDLE);
         bds.setMaxOpenPreparedStatements(MAX_STATEMENT);
-        bds.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        bds.setDriverClassName(DRIVER);
     }
 
     public static Connection getConnection() throws SQLException{
@@ -43,48 +44,17 @@ public class JDBCConnectionPool {
         Properties properties=new Properties();
         try (FileInputStream file = new FileInputStream(PROP_FILE)){
             properties.load(file);
-        }catch (IOException e){
+            }catch (IOException e){
             e.printStackTrace();
         }
+
+        DRIVER=properties.getProperty("jdbc.driver");
         URL=properties.getProperty("jdbc.url");
         USERNAME=properties.getProperty("jdbc.username");
         PASSWORD=properties.getProperty("jdbc.password");
     }
 
 
-
-
- /*   public static Connection getConnection(){
-
-        Properties properties=new Properties();
-        try (FileInputStream file = new FileInputStream("/src/main/resources/db/db.properties")){
-            properties.load(file);
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-
-        String driver=properties.getProperty("jdbc.driver");
-        try{
-            Class.forName(driver);
-        }catch (ClassNotFoundException e){
-            e.printStackTrace();
-        }
-
-        String url=properties.getProperty("jdbc.url");
-        String username=properties.getProperty("jdbc.username");
-        String password=properties.getProperty("jdbc.password");
-        Connection connection=null;
-        try {
-            connection = DriverManager.getConnection(url, username, password);
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-
-        return connection;
-
-
-
-    }*/
 
 
 

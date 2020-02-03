@@ -1,8 +1,9 @@
 package epam.ua.javacore.repository.jdbc;
 
 import epam.ua.javacore.model.Account;
+import epam.ua.javacore.repository.AccountRepository;
 
-public class JdbcAccountRepository extends JdbcGeneric<Account> {
+public class JdbcAccountRepository implements AccountRepository, JdbcGeneric<Account> {
 
     private final String sqlSelectAll="SELECT * FROM account";
     private final String sqlSelectID="SELECT * FROM account WHERE id=?";
@@ -15,25 +16,23 @@ public class JdbcAccountRepository extends JdbcGeneric<Account> {
         return sqlMax;
     }
 
-
-
     @Override
-    String getSqlSelectAll() {
+    public String getSqlSelectAll() {
         return sqlSelectAll;
     }
 
     @Override
-    String getSqlSelectID() {
+    public String getSqlSelectID() {
         return sqlSelectID;
     }
 
     @Override
-    String getSqlAdd() {
+    public String getSqlAdd() {
         return sqlAdd;
     }
 
     @Override
-    String getSqlDelete() {
+    public String getSqlDelete() {
         return sqlDelete;
     }
 

@@ -1,9 +1,10 @@
 package epam.ua.javacore.repository.jdbc;
 
 import epam.ua.javacore.model.Skill;
+import epam.ua.javacore.repository.SkillRepository;
 
 
-public class JdbcSkillRepository extends JdbcGeneric<Skill> {
+public class JdbcSkillRepository implements SkillRepository, JdbcGeneric<Skill> {
 
 
     private final String sqlSelectAll="SELECT * FROM skill";
@@ -19,22 +20,22 @@ public class JdbcSkillRepository extends JdbcGeneric<Skill> {
     }
 
     @Override
-    String getSqlSelectAll() {
+    public String getSqlSelectAll() {
         return sqlSelectAll;
     }
 
     @Override
-    String getSqlSelectID() {
+    public String getSqlSelectID() {
         return sqlSelectID;
     }
 
     @Override
-    String getSqlAdd() {
+    public String getSqlAdd() {
         return sqlAdd;
     }
 
     @Override
-    String getSqlDelete() {
+    public String getSqlDelete() {
         return sqlDelete;
     }
 }
