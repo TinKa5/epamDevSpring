@@ -1,3 +1,0 @@
-1 tototo ACTIVE
-3 roro ACTIVE
-2 popop NONACTIVE
