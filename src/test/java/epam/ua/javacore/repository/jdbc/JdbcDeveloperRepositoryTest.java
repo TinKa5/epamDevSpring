@@ -1,24 +1,37 @@
 package epam.ua.javacore.repository.jdbc;
 
 
+import epam.ua.javacore.model.Account;
+import epam.ua.javacore.model.AccountStatus;
+import epam.ua.javacore.model.Developer;
 import epam.ua.javacore.model.Skill;
 import epam.ua.javacore.util.jdbc.JDBCConnectionPool;
-import org.junit.*;
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.Collection;
-import static epam.ua.javacore.repository.jdbc.UtilTest.ChangePropertyToTest;
-import static epam.ua.javacore.repository.jdbc.UtilTest.ChangePropertyToWork;
-import static epam.ua.javacore.repository.jdbc.UtilTest.populateDB;
+import java.util.HashSet;
 
-public class JdbcSkillRepositoryTest {
+import static epam.ua.javacore.repository.jdbc.UtilTest.*;
+import static org.assertj.core.api.Assertions.assertThat;
+
+public class JdbcDeveloperRepositoryTest {
 
     static Connection connection;
-    JdbcSkillRepository repository=new JdbcSkillRepository();;
+    JdbcDeveloperRepository repository=new JdbcDeveloperRepository();;
 
-    Skill entity1=new Skill("Php");
-    Skill entity2=new Skill("C++");
+    Developer entity1=new Developer("Kate",new HashSet<Skill>(
+            Arrays.asList(new Skill("Java"), new Skill("Python"))),
+            new Account("romik@gmail.com", AccountStatus.valueOf("ACTIVE")));
+
+    Developer entity2=new Developer("Jack",new HashSet<Skill>(
+            Arrays.asList(new Skill("Python"))),
+            new Account("jack@gmail.com", AccountStatus.valueOf("NONACTIVE")));
 
 
     @BeforeClass
@@ -45,7 +58,7 @@ public class JdbcSkillRepositoryTest {
     @Test
     public void testGetAll() {
         Collection entities=repository.getAll();
-        assertThat(4).isEqualTo(entities.size());
+        assertThat(3).isEqualTo(entities.size());
         assertThat(repository.getAll()).usingElementComparatorIgnoringFields("id").contains(entity1);
         assertThat(repository.getAll()).doesNotHaveDuplicates();
 
@@ -53,8 +66,8 @@ public class JdbcSkillRepositoryTest {
 
     @Test
     public void testGetId() {
-
-        assertThat(repository.get(2L)).isEqualToIgnoringGivenFields(entity1,"id");
+        repository.get(3L);
+        assertThat(repository.get(3L)).isEqualToIgnoringGivenFields(entity1,"id");
     }
 
     @Test
@@ -71,17 +84,17 @@ public class JdbcSkillRepositoryTest {
 
     @Test
     public void testDelete(){
-        Collection<Skill> allOld=repository.getAll();
-        Skill skill=(Skill) allOld.toArray()[0];
-        assertThat(repository.delete(skill.getId())).isTrue();
+        Collection<Developer> allOld=repository.getAll();
+        Developer developer=(Developer) allOld.toArray()[0];
+        assertThat(repository.delete(developer.getId())).isTrue();
         assertThat(repository.getAll().size()).isEqualTo(allOld.size()-1);
-        assertThat(repository.getAll()).doesNotContain(skill);
+        assertThat(repository.getAll()).doesNotContain(developer);
     }
 
     @Test
     public void testDeleteNotExist(){
-        Collection<Skill> allOld=repository.getAll();
-        Long maxid=allOld.stream().map(Skill::getId).max(Long::compareTo).get();
+        Collection<Developer> allOld=repository.getAll();
+        Long maxid=allOld.stream().map(Developer::getId).max(Long::compareTo).get();
         assertThat(repository.delete(maxid+1)).isFalse();
         assertThat(repository.getAll().size()).isEqualTo(allOld.size());
     }

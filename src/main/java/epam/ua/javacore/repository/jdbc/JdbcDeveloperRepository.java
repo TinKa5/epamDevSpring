@@ -14,12 +14,12 @@ import java.util.Set;
 
 public class JdbcDeveloperRepository implements DeveloperRepository, JdbcGeneric<Developer> {
 
-    private final String sqlSelectAll = "SELECT dev.id, dev.name, account.id," +
-            "account.content, account.status, skill.id, skill.name" +
-            " FROM developer AS dev" +
-            " left JOIN skills_developers AS temp ON dev.id=developer_id" +
-            " left JOIN skill AS skill ON temp.skill_id=skill.id" +
-            " left JOIN account AS account ON dev.account_id=account.id";
+    private final String sqlSelectAll = "SELECT dev.id, dev.name, ac.id," +
+            "ac.content, ac.status, sk.id, sk.name" +
+            " FROM developer dev" +
+            " left JOIN skills_developers temp ON dev.id=temp.developer_id" +
+            " left JOIN skill sk ON temp.skill_id=sk.id" +
+            " left JOIN account ac ON dev.account_id=ac.id";
 
     private final String sqlSelectID = sqlSelectAll + " WHERE dev.id=?";
 
@@ -39,7 +39,7 @@ public class JdbcDeveloperRepository implements DeveloperRepository, JdbcGeneric
     }
 
 
-    @Override
+   @Override
     public Developer add(Developer developer) {
 
         Developer loadedDeveloper = JdbcGeneric.super.add(developer);
@@ -60,7 +60,7 @@ public class JdbcDeveloperRepository implements DeveloperRepository, JdbcGeneric
         return get(loadedDeveloper.getId());
     }
 
-
+/*
     @Override
     public boolean delete(Long id) {
         boolean result = JdbcGeneric.super.delete(id);
@@ -77,7 +77,7 @@ public class JdbcDeveloperRepository implements DeveloperRepository, JdbcGeneric
         }
         return result;
     }
-
+*/
     @Override
     public String getSqlSelectAll() {
         return sqlSelectAll;

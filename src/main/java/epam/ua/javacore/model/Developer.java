@@ -10,6 +10,14 @@ public class Developer extends Entity {
     Set<Skill> skillSet;
     Account account;
 
+    public Developer(){};
+
+    public Developer(String name, Set<Skill> skillSet, Account account) {
+        this.name = name;
+        this.skillSet = skillSet;
+        this.account = account;
+    }
+
     public String getName() {
         return name;
     }
@@ -22,7 +30,7 @@ public class Developer extends Entity {
         return account;
     }
 
-        public void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 

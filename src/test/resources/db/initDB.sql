@@ -8,19 +8,22 @@ CREATE TABLE skill(
   name VARCHAR(30) NOT NULL
 );
 
- CREATE TABLE account(
-    id INT AUTO_INCREMENT PRIMARY KEY ,
-    content VARCHAR(250) NOT NULL ,
-    status VARCHAR(30) NOT NULL
-   );
+CREATE TABLE account(
+  id INT AUTO_INCREMENT PRIMARY KEY ,
+  content VARCHAR(250) NOT NULL ,
+  status VARCHAR(30) NOT NULL
+);
 
-  CREATE TABLE developer(
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(50) NOT NULL,
-    account_id INT REFERENCES account(id)
-  );
+CREATE TABLE developer(
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(50) NOT NULL,
+  account_id INT,
+  FOREIGN KEY (account_id) references account(id) ON DELETE SET NULL
+);
 
 CREATE TABLE skills_developers(
-  developer_id INT NOT NULL REFERENCES  developer(id),
-  skill_id INT NOT NULL REFERENCES skill(id)
+  developer_id INT NOT NULL,
+  skill_id INT NOT NULL,
+  FOREIGN KEY (developer_id) REFERENCES developer(id) ON DELETE CASCADE,
+  FOREIGN KEY (skill_id) REFERENCES skill(id) ON DELETE CASCADE
 )

@@ -24,7 +24,7 @@ INSERT INTO skills_developers(developer_id, skill_id) VALUES ('4', '4');
 INSERT INTO skills_developers(developer_id, skill_id) VALUES ('5', '2');
 INSERT INTO skills_developers(developer_id, skill_id) VALUES ('5', '3');
 
-SELECT dev.id, dev.name, account.id, account.content, account.status, skill.id, skill.name
-    FROM developer AS dev left JOIN skills_developers AS temp ON dev.id=developer_id
-    left JOIN skill AS skill ON temp.skill_id=skill.id
-    left JOIN account AS account ON dev.account_id=account.id
+SELECT dev.id, dev.name, ac.id,ac.content, ac.status, sk.id, sk.name
+FROM developer dev left JOIN skills_developers temp ON dev.id=temp.developer_id
+                   left JOIN skill sk ON temp.skill_id=sk.id
+                                left JOIN account ac ON dev.account_id=ac.id

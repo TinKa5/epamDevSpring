@@ -71,15 +71,15 @@ public class JDBCMapper<T>{
                 dev.setId(devId);
                 dev.setName(resultSet.getString("dev.name"));
                 ////add account
-                Long accounId = resultSet.getLong("account.id");
+                Long accounId = resultSet.getLong("ac.id");
                 if (isExist(account, accounId)) {
                     dev.setAccount(account.get(accounId));
                 } else {
                     Account acc = new Account();
                     acc.setId(accounId);
-                    acc.setContent(resultSet.getString("account.content"));
+                    acc.setContent(resultSet.getString("ac.content"));
 
-                    String status=resultSet.getString("account.status");
+                    String status=resultSet.getString("ac.status");
                     acc.setAccountStatus((status)==null?
                             null:
                             AccountStatus.valueOf(status));
@@ -93,13 +93,13 @@ public class JDBCMapper<T>{
                 skillset = developer.get(devId).getSkillSet();
             }
 
-            Long skillId = resultSet.getLong("skill.id");
+            Long skillId = resultSet.getLong("sk.id");
             if (isExist(skill, skillId)) {
                 skillset.add(skill.get(skillId));
             } else {
                 Skill sk = new Skill();
                 sk.setId(skillId);
-                sk.setName(resultSet.getString("skill.name"));
+                sk.setName(resultSet.getString("sk.name"));
                 skillset.add(sk);
                 skill.put(skillId, sk);
             }
