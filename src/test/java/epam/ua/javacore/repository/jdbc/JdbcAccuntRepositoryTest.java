@@ -22,7 +22,7 @@ public class JdbcAccuntRepositoryTest {
     static Connection connection;
     JdbcAccountRepository repository=new JdbcAccountRepository();;
 
-    Account entity1=new Account("luka@gmail.com", AccountStatus.valueOf("ACTIVE"));
+    Account entity1=new Account("romik@gmail.com", AccountStatus.valueOf("ACTIVE"));
     Account entity2=new Account("luka@gmail.com", AccountStatus.valueOf("NONACTIVE"));
 
 
