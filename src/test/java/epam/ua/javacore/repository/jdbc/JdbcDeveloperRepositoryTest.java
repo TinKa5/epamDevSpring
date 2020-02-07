@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Set;
 
 import static epam.ua.javacore.repository.jdbc.UtilTest.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,14 +26,22 @@ public class JdbcDeveloperRepositoryTest {
     static Connection connection;
     JdbcDeveloperRepository repository=new JdbcDeveloperRepository();;
 
-    Developer entity1=new Developer("Kate",new HashSet<Skill>(
-            Arrays.asList(new Skill("Java"), new Skill("Python"))),
-            new Account("romik@gmail.com", AccountStatus.valueOf("ACTIVE")));
+    Developer entity1;
+    Developer entity2;
 
-    Developer entity2=new Developer("Jack",new HashSet<Skill>(
-            Arrays.asList(new Skill("Python"))),
-            new Account("jack@gmail.com", AccountStatus.valueOf("NONACTIVE")));
+    {
+        entity1 = new Developer("Kate", new HashSet<Skill>(
+                Arrays.asList(new Skill("Java"), new Skill("Python"))),
+                new Account("romik@gmail.com", AccountStatus.valueOf("ACTIVE")));
 
+
+        Account account = new Account("romik@gmail.com", AccountStatus.valueOf("ACTIVE"));
+        account.setId(2L);
+        Skill skill=new Skill("Python");
+        skill.setId(3L);
+        entity2 = new Developer("Jack", new HashSet<Skill>(
+                Arrays.asList(skill)),account);
+    }
 
     @BeforeClass
     public static void initTestDB(){
@@ -59,15 +68,15 @@ public class JdbcDeveloperRepositoryTest {
     public void testGetAll() {
         Collection entities=repository.getAll();
         assertThat(3).isEqualTo(entities.size());
-        assertThat(repository.getAll()).usingElementComparatorIgnoringFields("id").contains(entity1);
+        assertThat(repository.getAll()).usingElementComparatorIgnoringFields("id","skillSet","account").contains(entity1);
         assertThat(repository.getAll()).doesNotHaveDuplicates();
 
     }
 
     @Test
     public void testGetId() {
-        repository.get(3L);
-        assertThat(repository.get(3L)).isEqualToIgnoringGivenFields(entity1,"id");
+        Developer dev=repository.get(3L);
+        assertThat(repository.get(3L)).isEqualToIgnoringGivenFields(entity1,"id","skillSet","account");
     }
 
     @Test
@@ -77,9 +86,10 @@ public class JdbcDeveloperRepositoryTest {
 
     @Test
     public void testAdd(){
-        assertThat(repository.getAll()).usingElementComparatorIgnoringFields("id").doesNotContain(entity2);
+        assertThat(repository.getAll()).usingElementComparatorIgnoringFields("id","skillSet","account").doesNotContain(entity2);
         repository.add(entity2);
-        assertThat(repository.getAll()).usingElementComparatorIgnoringFields("id").contains(entity2);
+        Collection<Developer> allOld=repository.getAll();
+        assertThat(repository.getAll()).usingElementComparatorIgnoringFields("id","skillSet","account").contains(entity2);
     }
 
     @Test

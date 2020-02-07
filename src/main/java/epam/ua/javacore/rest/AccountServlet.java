@@ -11,8 +11,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collection;
 import java.util.Objects;
 
 
@@ -32,16 +34,24 @@ public class AccountServlet extends HttpServlet {
         try {
             Long id =getId(req);
             try {
-                pw.println(gson.toJson(service.get(id)));
+                Account account=service.get(id);
+                String s=gson.toJson(account);
+
+               // FileWriter fw=new FileWriter("./src/test/resources/mockData.txt");
+                //fw.write(s);
+               // fw.flush();
+                pw.println(s);
             }catch (NotFoundException e){
                 log.warn(e.getMessage());
                 resp.sendError(561, e.getMessage());
             }
         }catch (NullPointerException e){
-            service.getAll().stream().forEach((x) -> pw.println(gson.toJson(x)));
+            Collection<Account> collection=service.getAll();
+            collection.stream().forEach((x) -> pw.println(gson.toJson(x)));
         }
 
-        pw.flush();
+        //pw.flush();
+       // pw.close();
     }
 
     @Override
@@ -49,7 +59,8 @@ public class AccountServlet extends HttpServlet {
         Account account = null;
         log.info("doPost in Servlet");
         try {
-            account = service.add(gson.fromJson(req.getReader(), Account.class));
+            Account ac=gson.fromJson(req.getReader(), Account.class);
+            account = service.add(ac);
         } catch (JsonParseException e) {
             log.warn("Incorrect Json format");
             resp.sendError(551, "Incorrect Json format");
@@ -57,7 +68,11 @@ public class AccountServlet extends HttpServlet {
             log.warn(e.getMessage());
             resp.sendError(561, e.getMessage());
         }
-        resp.getWriter().println(gson.toJson(account));
+        PrintWriter pw=resp.getWriter();
+        pw.println(gson.toJson(account));
+        pw.flush();
+       // pw.close();
+
     }
 
     @Override

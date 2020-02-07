@@ -64,22 +64,22 @@ public class JDBCMapper<T>{
         while (resultSet.next()) {
 
             Set skillset;
-            Long devId = resultSet.getLong("dev.id");
+            Long devId = resultSet.getLong(1);
             if (!isExist(developer, devId)) {
                 Developer dev = new Developer();
                 developer.put(devId, dev);
                 dev.setId(devId);
-                dev.setName(resultSet.getString("dev.name"));
+                dev.setName(resultSet.getString(2));
                 ////add account
-                Long accounId = resultSet.getLong("ac.id");
+                Long accounId = resultSet.getLong(3);
                 if (isExist(account, accounId)) {
                     dev.setAccount(account.get(accounId));
                 } else {
                     Account acc = new Account();
                     acc.setId(accounId);
-                    acc.setContent(resultSet.getString("ac.content"));
+                    acc.setContent(resultSet.getString(4));
 
-                    String status=resultSet.getString("ac.status");
+                    String status=resultSet.getString(5);
                     acc.setAccountStatus((status)==null?
                             null:
                             AccountStatus.valueOf(status));
@@ -93,13 +93,13 @@ public class JDBCMapper<T>{
                 skillset = developer.get(devId).getSkillSet();
             }
 
-            Long skillId = resultSet.getLong("sk.id");
+            Long skillId = resultSet.getLong(6);
             if (isExist(skill, skillId)) {
                 skillset.add(skill.get(skillId));
             } else {
                 Skill sk = new Skill();
                 sk.setId(skillId);
-                sk.setName(resultSet.getString("sk.name"));
+                sk.setName(resultSet.getString(7));
                 skillset.add(sk);
                 skill.put(skillId, sk);
             }
