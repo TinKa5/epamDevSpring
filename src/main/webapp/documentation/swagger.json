@@ -3,26 +3,26 @@
   "info": {
     "description": "This is a CRUD REST API DeveloperCRUD",
     "version": "1.0.0",
-    "title": "DeveloperCRUD",
-    "termsOfService": "https://github.com/TergBug",
+    "title": "EpamDev",
+    "termsOfService": "https://epamdev.herokuapp.com/",
     "contact": {
-      "email": "tergbug@gmail.com"
+      "email": "tanua8282@gmail.com"
     }
   },
-  "host": "developercrud.herokuapp.com",
+  "host": "epamdev.herokuapp.com",
   "basePath": "/",
   "tags": [
     {
       "name": "skill",
-      "description": "Developer`s skill"
+      "description": ""
     },
     {
       "name": "account",
-      "description": "Developer`s account"
+      "description": ""
     },
     {
       "name": "developer",
-      "description": "Developer`s info"
+      "description": ""
     }
   ],
   "schemes": [
@@ -30,7 +30,7 @@
     "http"
   ],
   "paths": {
-    "/api/v1/skills": {
+    "/skill": {
       "get": {
         "tags": [
           "skill"
@@ -92,33 +92,6 @@
           }
         }
       },
-      "put": {
-        "tags": [
-          "skill"
-        ],
-        "summary": "Update an existing skill",
-        "description": "",
-        "consumes": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "skill",
-            "schema": {
-              "$ref": "#/definitions/Skill"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Cannot update skill"
-          }
-        }
-      },
       "delete": {
         "tags": [
           "skill"
@@ -141,7 +114,7 @@
         }
       }
     },
-    "/api/v1/accounts": {
+    "/account": {
       "get": {
         "tags": [
           "account"
@@ -203,33 +176,6 @@
           }
         }
       },
-      "put": {
-        "tags": [
-          "account"
-        ],
-        "summary": "Update an existing account",
-        "description": "",
-        "consumes": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "account",
-            "schema": {
-              "$ref": "#/definitions/Account"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Cannot update account"
-          }
-        }
-      },
       "delete": {
         "tags": [
           "account"
@@ -252,7 +198,7 @@
         }
       }
     },
-    "/api/v1/developers": {
+    "/developer": {
       "get": {
         "tags": [
           "developer"
@@ -382,15 +328,14 @@
         "id": {
           "type": "integer"
         },
-        "name": {
+        "content": {
           "type": "string"
         },
-        "status": {
+        "accountStatus": {
           "type": "string",
           "enum": [
             "ACTIVE",
-            "BANNED",
-            "DELETED"
+            "NONACTIVE"
           ]
         }
       }
@@ -401,13 +346,10 @@
         "id": {
           "type": "integer"
         },
-        "firstName": {
+        "name": {
           "type": "string"
         },
-        "lastName": {
-          "type": "string"
-        },
-        "skills": {
+        "skillSet": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Skill"
