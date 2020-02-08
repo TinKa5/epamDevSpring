@@ -115,7 +115,6 @@
             "name": "id",
             "in": "query",
             "description": "ID of skill",
-            "required": true,
             "type": "integer"
           }
         ],
