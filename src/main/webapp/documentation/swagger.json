@@ -74,6 +74,9 @@
         "consumes": [
           "application/json"
         ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "body",
@@ -85,9 +88,15 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Skill"
+            }
           },
-          "400": {
+          "551": {
+            "description": "Incorrect Json format"
+          },
+          "561": {
             "description": "Cannot create skill"
           }
         }
@@ -109,7 +118,18 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/Skill"
+              }
+            }
+          },
+          "552": {
+            "description": "Incorrect id parameter"
+          },
+          "561": {
+            "description": "Cannot delete skill"
           }
         }
       }
@@ -169,9 +189,15 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
           },
-          "400": {
+          "551": {
+            "description": "Incorrect Json format"
+          },
+          "561": {
             "description": "Cannot create account"
           }
         }
@@ -193,7 +219,18 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/Account"
+              }
+            }
+          },
+          "552": {
+            "description": "Incorrect id parameter"
+          },
+          "561": {
+            "description": "Cannot delete account"
           }
         }
       }
@@ -253,37 +290,16 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Cannot create developer"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "developer"
-        ],
-        "summary": "Update an existing developer",
-        "description": "",
-        "consumes": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "developer",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/Developer"
             }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
           },
-          "400": {
-            "description": "Cannot update developer"
+          "551": {
+            "description": "Incorrect Json format"
+          },
+          "561": {
+            "description": "Cannot create developer"
           }
         }
       },
@@ -304,7 +320,18 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/Developer"
+              }
+            }
+          },
+          "552": {
+            "description": "Incorrect id parameter"
+          },
+          "561": {
+            "description": "Cannot delete developer"
           }
         }
       }
