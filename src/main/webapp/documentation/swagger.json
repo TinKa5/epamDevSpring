@@ -107,6 +107,9 @@
         ],
         "summary": "Delete skill",
         "description": "",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
