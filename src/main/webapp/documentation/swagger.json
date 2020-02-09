@@ -107,28 +107,21 @@
         ],
         "summary": "Delete skill",
         "description": "",
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "name": "id",
             "in": "query",
             "description": "ID of skill",
+            "required": true,
             "type": "integer"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "items": {
-                "$ref": "#/definitions/Skill"
-              }
-            }
+            "description": "OK"
           },
-          "552": {
-            "description": "Incorrect id parameter"
+          "551": {
+            "description": "Incorrect Json format"
           },
           "561": {
             "description": "Cannot delete skill"

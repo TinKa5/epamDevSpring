@@ -63,10 +63,13 @@ public class SkillServlet extends HttpServlet {
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("application/json");
+        resp.setCharacterEncoding("UTF-8");
+
         log.info("doDelete in Servlet");
         try{
             service.delete(getId(req));
-            resp.sendRedirect("/skill");
+            //resp.sendRedirect("/skill");
         }catch (NullPointerException e){
             log.warn("Incorrect id parameter");
             resp.sendError(552, "Incorrect id parameter");
