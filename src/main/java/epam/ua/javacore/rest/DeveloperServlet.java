@@ -41,6 +41,7 @@ public class DeveloperServlet extends HttpServlet {
                 resp.sendError(561, e.getMessage());
             }
         }catch (NullPointerException e){
+
             service.getAll().stream().forEach((x) -> pw.println(gson.toJson(x)));
         }
 
