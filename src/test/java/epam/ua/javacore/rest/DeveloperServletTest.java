@@ -4,7 +4,9 @@ package epam.ua.javacore.rest;
 import epam.ua.javacore.exception.NotFoundException;
 import epam.ua.javacore.model.Account;
 import epam.ua.javacore.model.AccountStatus;
-import epam.ua.javacore.service.AccountService;
+import epam.ua.javacore.model.Developer;
+import epam.ua.javacore.model.Skill;
+import epam.ua.javacore.service.DeveloperService;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,18 +14,18 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class AccountServletTest extends Mockito{
+public class DeveloperServletTest extends Mockito{
 
     @InjectMocks
-    private static AccountServlet servlet;
+    private static DeveloperServlet servlet;
 
     @Mock
     HttpServletRequest request;
@@ -31,16 +33,23 @@ public class AccountServletTest extends Mockito{
     @Mock
     HttpServletResponse response;
     @Mock
-    AccountService service;
+    DeveloperService service;
 
+    Developer entity1;
+    {
+        Skill sk = new Skill("Java");
+        sk.setId(1L);
+        Account ac = new Account("tinka@gmail.com", AccountStatus.valueOf("ACTIVE"));
+        ac.setId(1L);
+        entity1 = new Developer("Oskar", new HashSet<>(Arrays.asList(sk)), ac);
+    }
 
-    private Account entity1 = new Account("romik@gmail.com", AccountStatus.valueOf("ACTIVE"));
-    private String entity2="./src/test/resources/mockAccount.txt";
+    private String entity2="./src/test/resources/mockDeveloper.txt";
 
 
     @BeforeClass
     public static void init() {
-        servlet = new AccountServlet();
+        servlet = new DeveloperServlet();
     }
 
     @Test
@@ -71,11 +80,11 @@ public class AccountServletTest extends Mockito{
     }
 
     @Test
-    public void testGetAll() throws NotFoundException, IOException {
+    public void testGetAll() throws  IOException {
 
         when(request.getParameter("id")).thenReturn(null);
         when(response.getWriter()).thenReturn(new PrintWriter(System.out));
-        List<Account> collection=new ArrayList<Account>(){{
+        List<Developer> collection=new ArrayList<Developer>(){{
             add(entity1);
         }};
         when(service.getAll()).thenReturn(collection);
@@ -90,10 +99,12 @@ public class AccountServletTest extends Mockito{
 
         BufferedReader br=new BufferedReader(new FileReader(new File(entity2)));
         when(request.getReader()).thenReturn(br);
-        when(response.getWriter()).thenReturn(new PrintWriter(System.out));
-        when(service.add(isNotNull(Account.class))).thenReturn(entity1);
+        PrintWriter pw=new PrintWriter(System.out);
+        when(response.getWriter()).thenReturn(pw);
+        when(service.add(isNotNull(Developer.class))).thenReturn(entity1);
         servlet.doPost(request, response);
-        verify(service, atLeast(1)).add(isNotNull(Account.class));
+        pw.flush();
+        verify(service, atLeast(1)).add(isNotNull(Developer.class));
     }
 
     @Test

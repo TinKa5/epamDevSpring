@@ -2,7 +2,7 @@ package epam.ua.javacore.rest;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
-import epam.ua.javacore.exeption.NotFoundException;
+import epam.ua.javacore.exception.NotFoundException;
 import epam.ua.javacore.model.Skill;
 import epam.ua.javacore.service.SkillService;
 import org.apache.log4j.Logger;
@@ -29,7 +29,6 @@ public class SkillServlet extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         PrintWriter pw = resp.getWriter();
         log.info("doGet in Servlet");
-
         try {
             Long id =getId(req);
             try {

@@ -1,6 +1,6 @@
 package epam.ua.javacore.service;
 
-import epam.ua.javacore.exeption.NotFoundException;
+import epam.ua.javacore.exception.NotFoundException;
 import epam.ua.javacore.model.Account;
 import epam.ua.javacore.repository.jdbc.JdbcAccountRepository;
 import org.apache.log4j.Logger;

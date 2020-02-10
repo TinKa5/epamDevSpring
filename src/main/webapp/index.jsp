@@ -15,33 +15,32 @@
 <body>
 <ul>
     <li><a href="?lang=en"><fmt:message key="label.lang.en"/></a></li>
-    <li><a href="?lang=zh"><fmt:message key="label.lang.zh"/></a></li>
     <li><a href="?lang=ru"><fmt:message key="label.lang.ru"/></a></li>
 </ul>
 <h2><fmt:message key="message.title"/></h2>
-<fmt:message key="message.description"/><br>
-<a href="documentation"><fmt:message key="message.documentation"/></a><br>
+<fmt:message key="message.content"/><br>
+<a href="documentation">https://epamdev.herokuapp.com/documentation/</a><br>
 <table style="border-spacing: 50px; width: 100%">
     <tr>
         <td style="text-align: center" colspan="3">
-            <a href="<%=linkToImg%>Project-uml.png"><img src="<%=linkToImg%>Project-uml.png" alt="UML" height="50%" width="50%"></a><br>
+            <a href="<%=linkToImg%>project.png"><img src="<%=linkToImg%>project.png" alt="UML" height="80%" width="65%"></a><br>
             Project UML diagram
         </td>
     </tr>
     <tr>
-        <td style="text-align: center" >
-            <img src="<%=linkToImg%>Skill-sequence.png" alt="Skill-seq" height="100%" width="100%"><br>
-            Skill sequence diagram
-        </td>
-        <td style="text-align: center" >
-            <img src="<%=linkToImg%>Account-sequence.png" alt="Account-seq" height="100%" width="100%"><br>
-            Account sequence diagram
-        </td>
-        <td style="text-align: center" >
-            <img src="<%=linkToImg%>Developer-sequence.png" alt="Developer-seq" height="100%" width="100%"><br>
-            Developer sequence diagram
+        <td style="text-align: center" colspan="3">
+            <a href="<%=linkToImg%>model.png"><img src="<%=linkToImg%>model.png" alt="UML" height="80%" width="65%"></a><br>
+            Model UML diagram
         </td>
     </tr>
+    <tr>
+        <td style="text-align: center" colspan="3">
+            <a href="<%=linkToImg%>repository.png"><img src="<%=linkToImg%>repository.png" alt="UML" height="80%" width="50%"></a><br>
+            Detail repository UML diagram
+        </td>
+    </tr>
+
 </table>
+
 </body>
 </html>

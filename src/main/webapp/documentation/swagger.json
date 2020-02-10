@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "This is a CRUD REST API DeveloperCRUD",
+    "description": "",
     "version": "1.0.0",
     "title": "EpamDev",
     "termsOfService": "https://epamdev.herokuapp.com/",
@@ -214,15 +214,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "items": {
-                "$ref": "#/definitions/Account"
-              }
-            }
+            "description": "OK"
           },
-          "552": {
-            "description": "Incorrect id parameter"
+          "551": {
+            "description": "Incorrect Json format"
           },
           "561": {
             "description": "Cannot delete account"
@@ -315,15 +310,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "items": {
-                "$ref": "#/definitions/Developer"
-              }
-            }
+            "description": "OK"
           },
-          "552": {
-            "description": "Incorrect id parameter"
+          "551": {
+            "description": "Incorrect Json format"
           },
           "561": {
             "description": "Cannot delete developer"

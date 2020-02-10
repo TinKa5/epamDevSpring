@@ -2,7 +2,7 @@ package epam.ua.javacore.rest;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
-import epam.ua.javacore.exeption.NotFoundException;
+import epam.ua.javacore.exception.NotFoundException;
 import epam.ua.javacore.model.Developer;
 
 import epam.ua.javacore.service.DeveloperService;
@@ -68,7 +68,7 @@ public class DeveloperServlet extends HttpServlet {
         log.info("doDelete in Servlet");
         try{
             service.delete(getId(req));
-            resp.sendRedirect("/developer");
+            //resp.sendRedirect("/developer");
         }catch (NullPointerException e){
             log.warn("Incorrect id parameter");
             resp.sendError(552, "Incorrect id parameter");

@@ -1,4 +1,4 @@
-package epam.ua.javacore.exeption;
+package epam.ua.javacore.exception;
 
 public class NotFoundException extends Exception {
 

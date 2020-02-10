@@ -1,6 +1,6 @@
 package epam.ua.javacore.service;
 
-import epam.ua.javacore.exeption.NotFoundException;
+import epam.ua.javacore.exception.NotFoundException;
 import epam.ua.javacore.model.Skill;
 import epam.ua.javacore.repository.jdbc.JdbcSkillRepository;
 import org.apache.log4j.Logger;
@@ -12,7 +12,7 @@ import static epam.ua.javacore.util.Validate.checkNotFoundWithId;
 public class SkillService {
     JdbcSkillRepository repository=new JdbcSkillRepository();
 
-    private static final Logger log = Logger.getLogger(AccountService.class);
+    private static final Logger log = Logger.getLogger(SkillService.class);
 
 
     public Collection<Skill> getAll(){

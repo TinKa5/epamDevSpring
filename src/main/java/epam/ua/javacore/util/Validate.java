@@ -1,6 +1,6 @@
 package epam.ua.javacore.util;
 
-import epam.ua.javacore.exeption.NotFoundException;
+import epam.ua.javacore.exception.NotFoundException;
 
 public class Validate {
     public static void checkNotFoundWithId(boolean found, Long id) throws NotFoundException{
