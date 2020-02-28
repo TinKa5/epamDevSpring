@@ -19,7 +19,7 @@
 </ul>
 <h2><fmt:message key="message.title"/></h2>
 <fmt:message key="message.content"/><br>
-<a href="documentation">https://epamdev.herokuapp.com/documentation/</a><br>
+<a href="../documentation">https://epamdev.herokuapp.com/documentation/</a><br>
 <table style="border-spacing: 50px; width: 100%">
     <tr>
         <td style="text-align: center" colspan="3">

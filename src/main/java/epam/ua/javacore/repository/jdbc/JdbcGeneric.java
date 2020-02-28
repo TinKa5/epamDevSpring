@@ -1,6 +1,7 @@
 package epam.ua.javacore.repository.jdbc;
 
 
+import epam.ua.javacore.annotation.Timed;
 import epam.ua.javacore.repository.GenericRepository;
 import epam.ua.javacore.util.jdbc.JDBCConnectionPool;
 
@@ -22,6 +23,7 @@ public interface JdbcGeneric<T> extends GenericRepository<T,Long> {
 
 
     @Override
+
     default public Collection<T> getAll() {
         try (Connection connection=JDBCConnectionPool.getConnection();
              PreparedStatement statement=connection.prepareStatement(getSqlSelectAll())){

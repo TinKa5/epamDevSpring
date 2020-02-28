@@ -5,13 +5,14 @@ import epam.ua.javacore.model.Skill;
 
 import epam.ua.javacore.repository.DeveloperRepository;
 import epam.ua.javacore.util.jdbc.JDBCConnectionPool;
+import org.springframework.stereotype.Repository;
 
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Set;
-
+@Repository("developerRepository")
 public class JdbcDeveloperRepository implements DeveloperRepository, JdbcGeneric<Developer> {
 
     private final String sqlSelectAll = "SELECT dev.id, dev.name, ac.id," +

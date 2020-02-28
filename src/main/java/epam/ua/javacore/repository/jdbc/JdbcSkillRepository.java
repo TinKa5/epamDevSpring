@@ -2,8 +2,9 @@ package epam.ua.javacore.repository.jdbc;
 
 import epam.ua.javacore.model.Skill;
 import epam.ua.javacore.repository.SkillRepository;
+import org.springframework.stereotype.Repository;
 
-
+@Repository("skillRepository")
 public class JdbcSkillRepository implements SkillRepository, JdbcGeneric<Skill> {
 
 

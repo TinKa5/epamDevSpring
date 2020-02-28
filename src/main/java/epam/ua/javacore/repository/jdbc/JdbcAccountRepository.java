@@ -1,8 +1,13 @@
 package epam.ua.javacore.repository.jdbc;
 
+import epam.ua.javacore.annotation.Timed;
 import epam.ua.javacore.model.Account;
 import epam.ua.javacore.repository.AccountRepository;
+import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
+
+@Repository("accountRepository")
 public class JdbcAccountRepository implements AccountRepository, JdbcGeneric<Account> {
 
     private final String sqlSelectAll="SELECT * FROM account";
@@ -36,4 +41,10 @@ public class JdbcAccountRepository implements AccountRepository, JdbcGeneric<Acc
         return sqlDelete;
     }
 
+
+    @Override
+    @Timed
+    public Collection<Account> getAll() {
+        return JdbcGeneric.super.getAll();
+    }
 }
