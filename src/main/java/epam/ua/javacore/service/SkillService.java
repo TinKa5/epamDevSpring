@@ -29,32 +29,18 @@ public class SkillService {
     }
     public Skill get(Long id)throws NotFoundException {
         log.info("getId in Service");
-        try{
-            return checkNotFoundWithId((Skill)repository.get(id),id);
-        }catch (NotFoundException e){
-            log.warn(e.getMessage());
-            throw new NotFoundException(e.getMessage());
-        }
+        return checkNotFoundWithId((Skill)repository.get(id),id);
+
     }
 
     public Skill add(Skill skill) throws NotFoundException {
         log.info("add in Service");
-        try{
-            return checkNotFound((Skill)repository.add(skill));
-        }catch (NotFoundException e){
-            log.warn(e.getMessage());
-            throw new NotFoundException(e.getMessage());
-        }
+        return checkNotFound((Skill)repository.add(skill));
 
     }
     public void delete(Long id) throws NotFoundException {
         log.info("delete in Service");
-        try{
-            checkNotFoundWithId(repository.delete(id),id);
-        }catch (NotFoundException e){
-            log.warn(e.getMessage());
-            throw new NotFoundException(e.getMessage());
-        }
+        checkNotFoundWithId(repository.delete(id),id);
 
     }
 }

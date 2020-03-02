@@ -1,5 +1,6 @@
 package epam.ua.javacore.util.jdbc;
 
+import epam.ua.javacore.exception.DatabaseException;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 
@@ -45,7 +46,7 @@ public class JDBCConnectionPool {
         try (FileInputStream file = new FileInputStream(PROP_FILE)){
             properties.load(file);
             }catch (IOException e){
-            e.printStackTrace();
+            throw new DatabaseException(e);
         }
 
         DRIVER=properties.getProperty("jdbc.driver");

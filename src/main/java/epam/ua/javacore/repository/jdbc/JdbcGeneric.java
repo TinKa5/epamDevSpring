@@ -2,6 +2,7 @@ package epam.ua.javacore.repository.jdbc;
 
 
 import epam.ua.javacore.annotation.Timed;
+import epam.ua.javacore.exception.DatabaseException;
 import epam.ua.javacore.repository.GenericRepository;
 import epam.ua.javacore.util.jdbc.JDBCConnectionPool;
 
@@ -30,9 +31,8 @@ public interface JdbcGeneric<T> extends GenericRepository<T,Long> {
             Collection<T> result=mapToObject(this,statement.executeQuery());
             return !result.isEmpty()?result:null;
         }catch (SQLException e){
-            e.printStackTrace();
+            throw new DatabaseException(e);
         }
-        return null;
     }
     @Override
     default public T get(Long id) {
@@ -44,7 +44,7 @@ public interface JdbcGeneric<T> extends GenericRepository<T,Long> {
                  return result.stream().findFirst().get();
             }
         }catch (SQLException e){
-            e.printStackTrace();
+            throw new DatabaseException(e);
         }
         return null;
     }
@@ -60,7 +60,7 @@ public interface JdbcGeneric<T> extends GenericRepository<T,Long> {
             i=maxId();
 
         }catch (SQLException e){
-            e.printStackTrace();
+            throw new DatabaseException(e);
         }
         return get(i);
 
@@ -73,28 +73,25 @@ public interface JdbcGeneric<T> extends GenericRepository<T,Long> {
             statement.setLong(1,id);
             return statement.executeUpdate()==0?false:true;
         }catch (SQLException e){
-            e.printStackTrace();
+            throw new DatabaseException(e);
         }
-
-        return false;
     }
 
 
-    default Long maxId(){
+    default Long maxId() {
 
-        try(Connection connection=JDBCConnectionPool.getConnection();
-            PreparedStatement statement=connection.prepareStatement(getSqlMax());) {
+        try (Connection connection = JDBCConnectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(getSqlMax());) {
 
-           ResultSet rs=statement.executeQuery();
+            ResultSet rs = statement.executeQuery();
             rs.first();
-            Long id=rs.getLong("max");
+            Long id = rs.getLong("max");
             return id;
 
 
-        }catch (SQLException e){
-            e.printStackTrace();
+        } catch (SQLException e) {
+            throw new DatabaseException(e);
         }
-        return null;
     }
 
 }

@@ -23,14 +23,10 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @ExceptionHandler(NotFoundException.class)
     public @ResponseBody
-    Account get(@PathVariable Long id) {
-        Account account = null;
-        try {
-            account = service.get(id);
-        } catch (NotFoundException e) {
-        }
-        return account;
+    Account get(@PathVariable Long id)throws NotFoundException{
+        return service.get(id);
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -41,21 +37,12 @@ public class AccountController {
 
     @RequestMapping(method = RequestMethod.POST)
     public @ResponseBody
-    Account add(@RequestBody Account account) {
-        Account newAccount = null;
-        try {
-            newAccount = service.add(account);
-        } catch (NotFoundException e) {
-        }
-        return newAccount;
+    Account add(@RequestBody Account account) throws NotFoundException{
+       return service.add(account);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable Long id) {
-        try {
-            service.delete(id);
-        } catch (NotFoundException e) {
-        }
-
+    public void delete(@PathVariable Long id) throws NotFoundException{
+       service.delete(id);
     }
 }

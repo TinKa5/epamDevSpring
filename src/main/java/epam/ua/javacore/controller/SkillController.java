@@ -25,13 +25,8 @@ public class SkillController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public @ResponseBody
-    Skill get(@PathVariable Long id) {
-        Skill skill = null;
-        try {
-            skill = service.get(id);
-        } catch (NotFoundException e) {
-        }
-        return skill;
+    Skill get(@PathVariable Long id) throws NotFoundException{
+      return service.get(id);
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -42,21 +37,12 @@ public class SkillController {
 
     @RequestMapping(method = RequestMethod.POST)
     public @ResponseBody
-    Skill add(@RequestBody Skill skill) {
-        Skill newSkill = null;
-        try {
-            newSkill = service.add(skill);
-        } catch (NotFoundException e) {
-        }
-        return newSkill;
+    Skill add(@RequestBody Skill skill) throws NotFoundException{
+       return service.add(skill);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable Long id) {
-        try {
-            service.delete(id);
-        } catch (NotFoundException e) {
-        }
-
-    }
+    public void delete(@PathVariable Long id) throws NotFoundException {
+        service.delete(id);
+       }
 }

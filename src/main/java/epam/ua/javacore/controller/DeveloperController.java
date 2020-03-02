@@ -22,13 +22,8 @@ public class DeveloperController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public @ResponseBody
-    Developer get(@PathVariable Long id) {
-        Developer developer = null;
-        try {
-            developer = service.get(id);
-        } catch (NotFoundException e) {
-        }
-        return developer;
+    Developer get(@PathVariable Long id) throws NotFoundException{
+        return service.get(id);
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -39,20 +34,12 @@ public class DeveloperController {
 
     @RequestMapping(method = RequestMethod.POST)
     public @ResponseBody
-    Developer add(@RequestBody Developer developer) {
-        Developer newDeveloper = null;
-        try {
-            newDeveloper = service.add(developer);
-        } catch (NotFoundException e) {
-        }
-        return newDeveloper;
+    Developer add(@RequestBody Developer developer) throws NotFoundException {
+       return service.add(developer);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable Long id) {
-        try {
-            service.delete(id);
-        } catch (NotFoundException e) {
-        }
-    }
+    public void delete(@PathVariable Long id) throws NotFoundException{
+        service.delete(id);
+       }
 }
